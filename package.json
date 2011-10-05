@@ -4,7 +4,7 @@
     { "name": "Alex Whitman", "email": "alex@alexwhitman.com" },
     { "name": "Paul Dixon", "email": "paul.dixon@mintbridge.co.uk" }
   ],
-  "name": "dubot",
+  "name": "dobot-storage-mongodb",
   "description": "MongoDB storage driver",
   "version": "0.0.0",
   "homepage": "http://dobot.github.com/",
