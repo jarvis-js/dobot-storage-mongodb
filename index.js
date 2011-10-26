@@ -39,9 +39,15 @@ MongoDBStorage.prototype.init = function() {
 
 MongoDBStorage.prototype.loadUsers = function() {
 	var self = this;
-	this.connection.collection('users', function(error, collection) {
+	this.load('users', function(users) {
+		self.emit('storage_users_loaded', users);
+	});
+}
+
+MongoDBStorage.prototype.load = function(key, callback) {
+	this.connection.collection(key, function(error, collection) {
 		collection.find().toArray(function(error, results) {
-			self.emit('storage_users_loaded', results);
+			callback(results);
 		});
 	});
 }
