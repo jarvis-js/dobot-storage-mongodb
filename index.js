@@ -1,9 +1,6 @@
-var util = require('util');
 var mongodb = require('mongodb');
 
 module.exports = MongoDBStorage;
-
-util.inherits(MongoDBStorage, process.EventEmitter);
 
 function MongoDBStorage(options) {
 	var defaults = {
@@ -22,7 +19,7 @@ function MongoDBStorage(options) {
 	this.connection = null;
 }
 
-MongoDBStorage.prototype.init = function() {
+MongoDBStorage.prototype.init = function(callback) {
 	var self = this;
 	var db = new mongodb.Db(this.options.database,
 	                        new mongodb.Server(this.options.host, this.options.port, this.options.server_options),
@@ -33,14 +30,7 @@ MongoDBStorage.prototype.init = function() {
 			process.exit(error.errno);
 		}
 		self.connection = connection;
-		self.emit('storage_initialised');
-	});
-}
-
-MongoDBStorage.prototype.loadUsers = function() {
-	var self = this;
-	this.load('users', function(users) {
-		self.emit('storage_users_loaded', users);
+		callback();
 	});
 }
 
