@@ -46,7 +46,9 @@ MongoDBStorage.prototype.save = function(key, data, callback) {
 	this.connection.collection(key, function(error, collection) {
 		collection.remove(function() {
 			collection.insert(data, {safe: true}, function() {
-				callback();
+				if (callback) {
+					callback();
+				}
 			});
 		});
 	});
