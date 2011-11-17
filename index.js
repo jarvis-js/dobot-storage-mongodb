@@ -37,7 +37,11 @@ MongoDBStorage.prototype.init = function(callback) {
 MongoDBStorage.prototype.load = function(key, callback) {
 	this.connection.collection(key, function(error, collection) {
 		collection.find().toArray(function(error, results) {
-			callback(results);
+			var loaded = undefined;
+			if (!error) {
+				loaded = results;
+			}
+			callback(loaded);
 		});
 	});
 }
