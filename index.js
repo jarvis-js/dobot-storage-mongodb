@@ -30,7 +30,9 @@ MongoDBStorage.prototype.init = function(callback) {
 			process.exit(error.errno);
 		}
 		self.connection = connection;
-		callback();
+		if (typeof callback === 'function') {
+			callback();
+		}
 	});
 }
 
@@ -41,7 +43,9 @@ MongoDBStorage.prototype.load = function(key, callback) {
 			if (!error) {
 				loaded = results;
 			}
-			callback(loaded);
+			if (typeof callback === 'function') {
+				callback(loaded);
+			}
 		});
 	});
 }
@@ -50,7 +54,7 @@ MongoDBStorage.prototype.save = function(key, data, callback) {
 	this.connection.collection(key, function(error, collection) {
 		collection.remove(function() {
 			collection.insert(data, {safe: true}, function() {
-				if (callback) {
+				if (typeof callback === 'function') {
 					callback();
 				}
 			});
