@@ -22,8 +22,9 @@ function MongoDBStorage(options) {
 MongoDBStorage.prototype.init = function(callback) {
 	var self = this;
 	var db = new mongodb.Db(this.options.database,
-	                        new mongodb.Server(this.options.host, this.options.port, this.options.server_options),
-	                        this.options.database_options);
+		new mongodb.Server(this.options.host, this.options.port, this.options.server_options),
+		this.options.database_options
+	);
 	db.open(function(error, connection) {
 		if (error) {
 			console.log('MongoDB Error (' + error.errno + '): ' + error.message);
