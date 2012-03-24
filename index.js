@@ -34,7 +34,7 @@ MongoDBStorage.prototype.init = function(callback) {
 			callback();
 		}
 	});
-}
+};
 
 MongoDBStorage.prototype.load = function(key, callback) {
 	this.connection.collection(key, function(error, collection) {
@@ -48,7 +48,7 @@ MongoDBStorage.prototype.load = function(key, callback) {
 			}
 		});
 	});
-}
+};
 
 MongoDBStorage.prototype.save = function(key, data, callback) {
 	this.connection.collection(key, function(error, collection) {
@@ -60,4 +60,4 @@ MongoDBStorage.prototype.save = function(key, data, callback) {
 			});
 		});
 	});
-}
+};
